@@ -16,6 +16,10 @@ public class Essai {
         this.contenu=contenu;
         this.dateHeureDebut=dateHeureDebut;
     }
+    public Essai(String contenu,LocalDateTime dateHeureDebut , Partie partie){
+        this(contenu,dateHeureDebut);
+        this.partie=partie;
+    }
 
     public Long getId() {
         return id;

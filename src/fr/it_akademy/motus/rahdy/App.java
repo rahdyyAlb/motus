@@ -1,5 +1,6 @@
 package fr.it_akademy.motus.rahdy;
 
+import fr.it_akademy.motus.rahdy.business.Essai;
 import fr.it_akademy.motus.rahdy.business.Mot;
 import fr.it_akademy.motus.rahdy.business.Partie;
 
@@ -14,6 +15,7 @@ import java.util.*;
 public class App {
 
     private static List<Mot> motList = new ArrayList<>();
+    private static List<Essai> essaiList = new ArrayList<>();
     private static LocalDateTime date = LocalDateTime.now();
     private static Scanner scanner = new Scanner(System.in);
 
@@ -27,6 +29,20 @@ public class App {
         System.out.println("Bienvenue sur Motus");
         System.out.println("Vous avez 6 essais pour trouver le mot secret");
         tirageMot();
+        System.out.println("Historique des essais par ordre chronologique :");
+        for (Essai essai : essaiList) {
+            System.out.println(essai.getDateHeureDebut() + " " + essai.getContenu());
+        }
+
+        // Trier l'historique par ordre alphabétique
+        List<Essai> essaisAlpha = new ArrayList<>(essaiList);
+        Collections.sort(essaisAlpha, Comparator.comparing(Essai::getContenu));
+
+        // Affichage de l'historique par ordre alphabétique
+        System.out.println("Historique des essais par ordre alphabétique :");
+        for (Essai essai : essaisAlpha) {
+            System.out.println(essai.getDateHeureDebut() + " " + essai.getContenu());
+        }
     }
 
     private static void tirageMot() {
@@ -70,11 +86,20 @@ public class App {
             char[] motsUtilisateurSaisi = motSaisie.toCharArray();
             compareGrilles(motsUtilisateurSaisi, motArray);
             compteur++;
-            System.out.println("essaye n°"+compteur+" vous avez saisie "+motSaisie);
+            System.out.println("Essai n°" + compteur + " vous avez saisi " + motSaisie);
             System.out.println(motsUtilisateurSaisi);
+            essaiList.add(new Essai(motSaisie, date,partie));
 
+
+
+
+            if (Arrays.equals(motsUtilisateurSaisi, motArray)) {
+                System.out.println("Bravo ! Vous avez réussi en " + compteur + " essai(s).");
+                break;
+            }
 
         }
+
     }
 
     private static void compareGrilles(char[] grilleJoueur, char[] grilleGagnante) {
@@ -91,6 +116,7 @@ public class App {
                 correspondance = false;
             }
         }
+
         if (!correspondance) {
             System.out.println("Certains éléments ne sont pas à la bonne position.");
         }
