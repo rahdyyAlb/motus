@@ -109,6 +109,7 @@ public class App {
             if (grilleJoueur[i] == grilleGagnante[i]) {
                 // Garder l'élément s'il correspond à la même position dans l'autre grille
             } else if (contains(grilleGagnante, grilleJoueur[i])) {
+                System.out.println(grilleJoueur[i]+" n'est pas à la bonne position.");
                 grilleJoueur[i] = '_'; // Remplacer si présent mais à la mauvaise position
                 correspondance = false;
             } else {
@@ -117,9 +118,7 @@ public class App {
             }
         }
 
-        if (!correspondance) {
-            System.out.println("Certains éléments ne sont pas à la bonne position.");
-        }
+
 
 
     }
