@@ -61,7 +61,7 @@ public class App {
         motArray[5] = motHsd.getNom().charAt(6);
         motArray[6] = motHsd.getNom().charAt(7);
 
-        System.out.println(motArray);
+        //System.out.println(motArray);
         String tire = "_______";
         char[] motsUtilisateur = new char[7];
         motsUtilisateur[0] = motHsd.getNom().charAt(1);
